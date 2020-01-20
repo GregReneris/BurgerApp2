@@ -1,61 +1,62 @@
 var express = require("express");
+var burger = require("../models/burger.js")
 
 var router = express.Router();
 
-// Import the model (sandwich.js) to use its database functions.
-var sandwich = require("../models/burger.js");
-
-// Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  sandwich.all(function(data) {
+  burger.findAll({raw:true}).then(function(data){
+
     var hbsObject = {
       kitchen: data
     };
-    console.log(hbsObject);
     res.render("index", hbsObject);
   });
+
 });
 
 router.post("/api/burger8000", function(req, res) {
-  sandwich.create([
-    "name", "devoured"
-  ], [
-    req.body.name, req.body.devoured
-  ], function(result) {
-    // Send back the ID of the new quote
-    res.json({ id: result.insertId });
+  burger.create({
+    name: req.body.name,
+    devoured: req.body.devoured
+  }).then( function(result) {
+    res.json(result.toJSON()); 
+    // result = result.get({plain:true})
+    // res.json({ id: result.id});
   });
 });
 
 router.put("/api/burger8000/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
-
-  console.log("condition", condition);
-  console.log(req.body.devoured, req.body)
-
-  sandwich.update({
-    devoured: req.body.devoured
-  }, condition, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
+  // var condition = "id = " + req.params.id;
+  burger.update(
+    {
+      devoured: req.body.devoured
+    },
+    {
+      where :{
+        id: req.params.id
+      }
     }
-  });
+    ).then(function(result){
+      res.status(200).end();
+    }).catch(function(err){
+      res.status(404).end()
+    });
 });
+
 
 router.delete("/api/burger8000/:id", function(req, res) {
   console.log("router.delete")
   console.log(req.params);
   
-
-  sandwich.delete(
-    req.params.id,  
-    function(result) {
-      // Send back the ID of the new quote
-      res.status(200).end();
-    });
+  burger.destroy({
+    where:{
+      id: Number(req.params.id)
+    }
+  }).then(function(result){
+    res.status(200).end();
+  }).catch(function(err){
+    res.status(404).end()
+  })
 });
 
 
