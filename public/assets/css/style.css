@@ -1,0 +1,42 @@
+li {
+  padding: 5px;
+  margin: 5px;
+  background: #faebd7;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.create-update-form {
+  padding: 5px;
+  margin: 5px;
+  background: aqua;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+
+/* Adding code underneath to format left right and align. */
+.leftside {
+  float:left;
+}
+
+.rightside {
+  float:right; 
+}
+
+body {
+  background: lightyellow;
+}
+
+.jumbotron {
+  background: cyan;
+}
+/* 
+.burger {
+  height: 300px;
+  width: auto;
+} */

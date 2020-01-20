@@ -1,0 +1,76 @@
+<div class="jumbotron">
+  <h1 class="text-center">Welcome to my Burger App!</h1>
+  <hr class="my-4">
+
+<div class ="row">
+<div class = "col-md-6 mx-auto justify-content-center"> 
+  <center> 
+  <img class="img-fluid burger text-center" src="/assets/pictures/burgerpng.png" alt="burger">
+  </center>
+</div>
+</div>
+
+
+</div>
+
+  
+<div class ="container">
+
+<div class ="row">
+<div class = "col-md-6 rightside">
+  
+<h2>Burgers that are not devoured!</h2>
+
+<ul >
+  {{#each kitchen}}
+    {{#unless devoured}}
+      {{> kitchen/sandwich-block devoured=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+</div>
+
+
+<div class = "col-md-6 leftside">
+
+
+<h2>Burgers that are devoured!</h2>
+
+<ul>
+  {{#each kitchen}}
+    {{#if devoured}}
+      {{> kitchen/sandwich-block devoured=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<br>
+</div>
+</div>
+  
+  <div class ="row">
+
+  <div class ="col-md-12 border justify-content-center">
+
+<form class="create-form text-center">
+<h2>Add a Burger</h2>
+
+
+    <div class="form-group">
+      <label for="ca">Burger You Want To Make:</label>
+      <input type="text" id="ca" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="sleep">Devoured?</label><br>
+      <input type="radio" name="devoured" value="1" checked> Devoured!<br>
+      <input type="radio" name="devoured" value="0"> Ready to Nom!
+    </div>
+
+    <button type="submit">Add Burger</button>
+    </form>
+  </div>
+
+
+  </div>
+</div>
