@@ -35,18 +35,43 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
 });
 
-var sequelize = new Sequelize("burgers10_db", "root", "password", {
-  host: "localhost",
-  port: 3306,
-  dialect: "mysql",
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
+var sequelize = new Sequelize(
+  "q0tv867f7fkrjnsm", 
+  "wrrp9b5efbpp0r1f", 
+  "znq72rzhjz64ysv0", 
+  {
+      host: "a5s42n4idx9husyc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+      port: 3306,
+      dialect: "mysql",
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+      }
   }
-});
+);
 
 // Exports the connection for other files to use
 module.exports = sequelize;
 
 //module.exports = connection;
+
+
+
+
+
+// var sequelize = new Sequelize(
+//   "burgers10_db", 
+//   "root", 
+//   "password", 
+//   {
+//       host: "localhost",
+//       port: 3306,
+//       dialect: "mysql",
+//       pool: {
+//         max: 5,
+//         min: 0,
+//         idle: 10000
+//       }
+//   }
+// );
